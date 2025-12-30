@@ -1,5 +1,12 @@
 import math
 
+__all__ = [
+    name for name in globals()
+    if not name.startswith("_")
+    and callable(globals()[name])
+]
+
+
 def is_prime(n: int) -> bool:
     """Check if a number is prime."""
     if n <= 1:

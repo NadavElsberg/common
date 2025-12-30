@@ -1,23 +1,15 @@
-from .formatitng import add_Commas, show_as_10th_power
-from .json_utils import get_json, save_json
-from .math import print_matrix, print_tuples, is_prime, is_allmost_prime, control_digit
-from .core import countTime
+from . import formatitng, json_utils, math, core, network
+
+from .formatitng import *
+from .json_utils import *
+from .math import *
+from .core import *
+
+
 __all__ = [
-    # formatting
-    "add_Commas",
-    "show_as_10th_power",
-
-    # json
-    "get_json",
-    "save_json",
-
-    # math
-    "print_matrix",
-    "print_tuples",
-    "is_prime",
-    "is_allmost_prime",
-    "control_digit",
-
-    # core
-    "countTime",
+    formatitng.__all__ +
+    math.__all__ +  
+    json_utils.__all__ +
+    core.__all__ +
+    network.__all__
 ]

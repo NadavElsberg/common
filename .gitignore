@@ -1,0 +1,13 @@
+# Ignore the test file so it is not uploaded to git
+test.py
+
+# Common Python ignores
+__pycache__/
+*.py[cod]
+*.so
+
+# Packaging
+build/
+dist/
+*.egg-info/
+*.eggs/
