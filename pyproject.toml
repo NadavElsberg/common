@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "common"
-version = "1.1.1"
+version = "1.1.2"
 description = "Shared utilities for casual scripting"
 authors = [{ name = "Nadav Elsberg" }]
 requires-python = ">=3.12"

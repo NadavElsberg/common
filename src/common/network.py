@@ -177,4 +177,61 @@ def is_port_open(host: str, port: int, timeout: float = 1.0, returntuple: bool =
         return _tuple_is_port_open(host, port, timeout=timeout)
     return _tuple_is_port_open(host, port, timeout=timeout)[0]
 
-   
+
+def ping_list(hosts: list[str], timeout: int = 2, count: int = 1) -> dict[str, bool]:
+    """
+    Ping a list of hosts and return a dictionary mapping each host to
+    its reachability status (True/False).
+
+    hosts: list of hostnames or IP addresses (list of strings)
+    timeout: timeout per packet in seconds (int, default 2)
+    count: number of ping packets to send (int, default 1)
+
+    returns: dict {host: is_reachable}
+    """
+    results = {}
+    for host in hosts:
+        results[host] = ping(host, timeout=timeout, count=count)
+    return results   
+
+
+def free_port_scanner(host: str, start_port: int, end_port: int, timeout: float = 1.0, show_progress: bool = False) -> list[int]:
+    """
+    Scan a range of TCP ports on the given host and return a list of open ports.
+
+    host: hostname or IP address (string)
+    start_port: starting port number (int)
+    end_port: ending port number (int)
+    timeout: timeout in seconds for each port check (float, default 1.0)
+
+    returns: list of open port numbers (list of ints)
+    """
+    RED = "\033[91m"
+    GREEN = "\033[92m"
+    RESET = "\033[0m"
+    open_ports = []
+    for port in range(start_port, end_port + 1):
+        resalt= not is_port_open(host, port, timeout=timeout)
+        if resalt:
+            open_ports.append(port)
+        if show_progress:
+            print(f"Checked port {port} {GREEN} Free{RESET}" if resalt else f"Checked port {port} {RED} Used{RESET}")
+    return open_ports
+
+def scan_ports_list(host: str, ports: list[int], timeout: float = 1.0) -> dict[int, bool]:
+    """
+    Scan a list of TCP ports on the given host and return a dictionary
+    mapping each port to its open status (True/False).
+
+    host: hostname or IP address (string)
+    ports: list of port numbers to check (list of ints)
+    timeout: timeout in seconds for each port check (float, default 1.0)
+
+    returns: dict {port: is_open}
+    """
+    results = {}
+    for port in ports:
+        results[port] = is_port_open(host, port, timeout=timeout)
+    return results
+
+
