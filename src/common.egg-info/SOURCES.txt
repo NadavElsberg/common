@@ -2,7 +2,7 @@ README.md
 pyproject.toml
 src/common/__init__.py
 src/common/core.py
-src/common/formatitng.py
+src/common/formating.py
 src/common/json_utils.py
 src/common/math.py
 src/common/network.py

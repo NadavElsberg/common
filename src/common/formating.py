@@ -7,7 +7,7 @@ __all__ = [
 ]
 
 
-def show_as_10th_power(num: int, length_to_return_string: int = 10) -> str:
+def show_as_10th_power(num: int, length_to_return_string: int = 2) -> str:
     """
     Docstring for show_as_10th_power
     Convert a number to a string representation in the form of "a*10^b".
