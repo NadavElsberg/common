@@ -17,6 +17,10 @@ def ping_host(host: str, count: int = 4, timeout: int = 2) -> tuple[bool, str]:
 
     returns: tuple (is_reachable: bool, output: str)
     """
+    
+    if not is_hostname_valid(host) and not is_ip_valid(host):
+        return False, "Invalid host"
+
     try:
         import platform
         import shutil
@@ -41,7 +45,6 @@ def ping_host(host: str, count: int = 4, timeout: int = 2) -> tuple[bool, str]:
     except Exception as e:
         return (False, str(e))
 
-
     
 def ping(host: str, timeout: int = 2, count: int = 1) -> bool:
     """
@@ -58,7 +61,7 @@ def ping(host: str, timeout: int = 2, count: int = 1) -> bool:
         return False
 
 
-def is_online(timeout: int = 5) -> bool:
+def am_I_online(timeout: int = 5) -> bool:
     """
     Check if the local machine has internet connectivity.
 
@@ -149,6 +152,12 @@ def get_mac_address() -> str:
 
 
 def _tuple_is_port_open(host: str, port: int, timeout: float = 1.0) -> tuple[bool,str]:
+    
+    if( not is_port_valid(port)):
+        return False, "Invalid port number"
+    if not is_hostname_valid(host) and not is_ip_valid(host):
+        return False, "Invalid host"
+    
     if ping(host, timeout=timeout) is False:
         return False,"Host unreachable"
     try:        
@@ -173,6 +182,8 @@ def is_port_open(host: str, port: int, timeout: float = 1.0, returntuple: bool =
     timeout: timeout in seconds (float, default 1.0)
     returntuple: if True, return a tuple (is_open: bool, message: str)
     """
+
+
     if returntuple:
         return _tuple_is_port_open(host, port, timeout=timeout)
     return _tuple_is_port_open(host, port, timeout=timeout)[0]
@@ -236,3 +247,69 @@ def scan_ports_list(host: str, ports: list[int], timeout: float = 1.0) -> dict[i
     return results
 
 
+def is_ip_valid(ip: str) -> bool:
+    """
+    Validate whether a given string is a valid IPv4 address.
+
+    ip: IP address as a string
+
+    returns: True if valid IPv4 address, otherwise False
+    """
+    try:
+        parts = ip.split(".")
+        if len(parts) != 4:
+            return False
+        for part in parts:
+            if not part.isdigit():
+                return False
+            num = int(part)
+            if num < 0 or num > 255:
+                return False
+        return True
+    except Exception:
+        return False
+
+
+def is_hostname_valid(hostname: str) -> bool:
+    """
+    Validate whether a given string is a valid hostname.
+
+    hostname: hostname as a string
+
+    returns: True if valid hostname, otherwise False
+    """
+    try:
+        if len(hostname) > 255:
+            return False
+        if hostname[-1] == ".":
+            hostname = hostname[:-1]
+        allowed = set("abcdefghijklmnopqrstuvwxyz"
+                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                      "0123456789"
+                      "-.")
+        for char in hostname:
+            if char not in allowed:
+                return False
+        labels = hostname.split(".")
+        for label in labels:
+            if len(label) == 0 or len(label) > 63:
+                return False
+            if label[0] == "-" or label[-1] == "-":
+                return False
+        return True
+    except Exception:
+        return False
+
+
+def is_port_valid(port: int) -> bool:
+    """
+    Validate whether a given integer is a valid TCP/UDP port number.
+
+    port: port number as an integer
+
+    returns: True if valid port number (0-65535), otherwise False
+    """
+    try:
+        return 0 <= int(port) <= 65535
+    except Exception:
+        return False
