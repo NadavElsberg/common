@@ -1,6 +1,0 @@
-Metadata-Version: 2.4
-Name: common
-Version: 1.1.22
-Summary: Shared utilities for casual scripting
-Author: Nadav Elsberg
-Requires-Python: >=3.12

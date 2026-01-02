@@ -6,7 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "common"
 version = "1.1.22"
 description = "Shared utilities for casual scripting"
-authors = [{ name = "Nadav Elsberg" }]
+authors = [{ name = "Nadav Elsberg", email = "Nadav.Elsberg@protonmail.com"}]
+urls = { "Homepage" = "https://github.com/NadavElsbreg/common.git" }
 requires-python = ">=3.12"
 
 [tool.setuptools]
