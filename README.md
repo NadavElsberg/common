@@ -11,7 +11,14 @@ The `src/common_documentations` directory contains detailed documentation for ea
 - [network](src/common_documentations/network.md) — network utilities: ping, IP discovery, port checks.
 
 ## Quick start
-Install the package (if packaged) or add this repo to your `PYTHONPATH` and import utilities from `common`:
+clone the packege and cd to the destination dir then run: "pip install -e ."
+
+for example: 
+```batch
+clone https://github.com/NadavElsbreg/common.git c:/common
+cd /d c:/common
+pip install -e .
+```
 
 ```python
 from common.formating import bytes_format_string
@@ -19,4 +26,4 @@ print(bytes_format_string(2048))  # -> '2.00 KB'
 ```
 
 ## Contributing
-Contributions are welcome — please open issues or PRs with tests and documentation updates.
+Contributions are welcome — please contact the developer via the Email address mentioned to get on the go

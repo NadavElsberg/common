@@ -1,0 +1,6 @@
+{
+    "python.analysis.enableEditableInstalls": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.extraPaths": ["./src"],
+    "python.analysis.indexing": true
+}
