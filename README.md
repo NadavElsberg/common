@@ -15,8 +15,8 @@ clone the packege and cd to the destination dir then run: "pip install -e ."
 
 for example: 
 ```batch
-clone https://github.com/NadavElsbreg/common.git c:/common
-cd /d c:/common
+git clone https://github.com/NadavElsbreg/common.git c:/common
+cd c:/common
 pip install -e .
 ```
 
