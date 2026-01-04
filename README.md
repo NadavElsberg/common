@@ -11,7 +11,10 @@ The `src/common_documentations` directory contains detailed documentation for ea
 - [network](src/common_documentations/network.md) — network utilities: ping, IP discovery, port checks.
 
 ## Quick start
-clone the packege and cd to the destination dir then run: "pip install -e ."
+2 ways to get started with the package:
+ 1) Download the "install.bat" file up aove and run it. this should get your default python installations and run put the dir there.
+ 2) Proceed to this installation procces as such:
+  clone the packege and cd to the destination dir then run: "pip install -e ."
 
 for example: 
 ```batch
