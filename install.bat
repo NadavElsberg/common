@@ -87,10 +87,14 @@ echo Upgrading pip in venv...
 "%VENV_PY%" -m pip install --upgrade pip setuptools wheel
 
 echo Installing package in editable mode into venv...
-"%VENV_PY%" -m pip install -e "%TARGET%" || (
+"%VENV_PY%" -m pip install -e "%TARGET%" -v || (
   echo Pip install failed inside venv.
   exit /b 1
 )
+
+echo Verifying installation inside venv:
+"%VENV_PY%" -m pip show common || echo 'pip show common returned nothing for the venv'
+"%VENV_PY%" -c "import common; import inspect; print('common at', getattr(common,'__file__', None))" || echo 'Failed to import common from the venv'
 
 echo SUCCESS: Repository cloned to "%TARGET%" and installed (editable) in "%TARGET%\venv".
 echo To use it, activate the venv:

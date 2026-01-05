@@ -12,9 +12,11 @@ The `src/common_documentations` directory contains detailed documentation for ea
 
 ## Quick start
 2 ways to get started with the package:
- 1) Download the "install.bat" file up aove and run it. this should get your default python installations and run put the dir there.
+ 1) Download the "install.bat"/"install.sh" file up aove and run it. this should get your default python installations and run put the dir there.
  2) Proceed to this installation procces as such:
-  clone the packege and cd to the destination dir then run: "pip install -e ."
+  - clone the packege
+  - cd to the destination dir
+  - then run: "pip install -e ." in the dir you cloned the repo to.
 
 for example: 
 ```batch
@@ -23,6 +25,8 @@ cd c:/common
 pip install -e .
 ```
 
+
+example of use of code
 ```python
 from common.formating import bytes_format_string
 print(bytes_format_string(2048))  # -> '2.00 KB'
