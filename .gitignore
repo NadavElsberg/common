@@ -1,5 +1,6 @@
 # Ignore the test file so it is not uploaded to git
 test.py
+test.json
 
 # Common Python ignores
 __pycache__/

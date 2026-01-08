@@ -32,5 +32,8 @@ from common.formating import bytes_format_string
 print(bytes_format_string(2048))  # -> '2.00 KB'
 ```
 
+## License
+This project is licensed under the MIT License — see the `LICENSE` file for details.
+
 ## Contributing
 Contributions are welcome — please contact the developer via the Email address mentioned to get on the go

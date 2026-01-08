@@ -4,9 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "common"
-version = "1.1.22"
+version = "1.1.23"
 description = "Shared utilities for casual scripting"
-authors = [{ name = "Nadav Elsberg", email = "Nadav.Elsberg@protonmail.com"}]
+authors = [{ name = "Nadav Elsberg", email = "Nadav.Elsberg@protonmail.com" }]
+license = { file = "LICENSE" }
 urls = { "Homepage" = "https://github.com/NadavElsbreg/common.git" }
 requires-python = ">=3.12"
 
