@@ -4,6 +4,7 @@ test.json
 
 # Common Python ignores
 __pycache__/
+src/common/__pycache__/
 *.py[cod]
 *.so
 

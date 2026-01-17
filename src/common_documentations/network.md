@@ -26,10 +26,11 @@
 
 ---
 
-### is_online(timeout: int = 5) -> bool
+### am_I_online(timeout: int = 5) -> bool
 
 - **Description:** Quick internet connectivity check by attempting to ping well-known DNS servers (`1.1.1.1`, `8.8.8.8`, `9.9.9.9`). Returns `True` as soon as one server responds.
 - **Parameters:** `timeout` (int)
+- **Notes:** The function is implemented in `network.py` as `am_I_online` (some older docs or references may call this `is_online`).
 
 ---
 
@@ -75,6 +76,26 @@
 ### scan_ports_list(host: str, ports: list[int], timeout: float = 1.0) -> dict[int, bool]
 
 - **Description:** Scan an explicit list of ports and return a dictionary mapping port -> open status (boolean).
+
+---
+
+## Internal helpers and validators
+
+### _tuple_is_port_open(host: str, port: int, timeout: float = 1.0) -> tuple[bool, str]
+
+- **Description:** Internal helper used by `is_port_open` that returns `(is_open, message)`. It performs validation of the host and port and returns a descriptive message suitable for callers requesting a tuple result (via `returntuple=True`). Not intended for public use but useful for debugging or advanced callers.
+
+### is_ip_valid(ip: str) -> bool
+
+- **Description:** Validate whether a string is a valid IPv4 address. Returns `True` if the string contains exactly four numeric octets in the range 0–255.
+
+### is_hostname_valid(hostname: str) -> bool
+
+- **Description:** Validate hostname format according to common rules: total length up to 255 characters, labels separated by `.`, each label 1–63 characters, no leading or trailing hyphens, and only letters, digits, hyphens or dots allowed. Returns `True` for valid hostnames.
+
+### is_port_valid(port: int) -> bool
+
+- **Description:** Validate whether an integer is a valid TCP/UDP port number (0–65535). Returns `True` for valid ports.
 
 ---
 
