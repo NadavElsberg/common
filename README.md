@@ -18,9 +18,9 @@ The `src/common_documentations` directory contains detailed documentation for ea
   - cd to the destination dir
   - then run: "pip install -e ." in the dir you cloned the repo to.
 
-for example: 
+for example{on a windows machine}: 
 ```batch
-git clone https://github.com/NadavElsbreg/common.git c:/common
+git clone https://github.com/NadavElsberg/common.git c:/common
 cd c:/common
 pip install -e .
 ```
