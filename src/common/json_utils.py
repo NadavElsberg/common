@@ -31,7 +31,7 @@ def get_json(path: str, base_dir: str = None):
         raise RuntimeError(f"Failed to parse {json_path}: {e}")
 
 
-def save_json(path: str, data, base_dir: str = None):
+def save_json(path: str, data, base_dir: str = None, writepath: bool = True):
     """Save JSON to a path."""
     if os.path.isabs(path):
         json_path = path
@@ -44,7 +44,8 @@ def save_json(path: str, data, base_dir: str = None):
         os.makedirs(os.path.dirname(json_path), exist_ok=True)
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
-        print(f"Saved data to {json_path}")
+        if writepath:
+            print(f"Saved JSON to {json_path}")
     except Exception as e:
         raise RuntimeError(f"Failed to save to {json_path}: {e}")
 

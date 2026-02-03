@@ -189,7 +189,7 @@ def is_port_open(host: str, port: int, timeout: float = 1.0, returntuple: bool =
     return _tuple_is_port_open(host, port, timeout=timeout)[0]
 
 
-def ping_list(hosts: list[str], timeout: int = 2, count: int = 1, print_progress: bool = False) -> dict[str, bool]:
+def ping_list(hosts: list[str], timeout: int = 2, count: int = 1, show_progress: bool = False) -> dict[str, bool]:
     """
     Ping a list of hosts and return a dictionary mapping each host to
     its reachability status (True/False).
@@ -203,7 +203,7 @@ def ping_list(hosts: list[str], timeout: int = 2, count: int = 1, print_progress
     results = {}
     for host in hosts:
         results[host] = ping(host, timeout=timeout, count=count)
-        if print_progress:
+        if show_progress:
             print(f"Pinged {host}: {'Reachable' if results[host] else 'Unreachable'}")
     return results   
 
