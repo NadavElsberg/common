@@ -29,7 +29,7 @@ def show_as_10th_power(num: int, length_to_return_string: int = 2) -> str:
         return math.floor(math.log10(abs(num))) + 1
 
 
-def add_Commas(num) -> str:
+def add_Commas(num: int) -> str:
     """Format a number with commas as thousands separators."""
     try:
         return f"{num:,}"

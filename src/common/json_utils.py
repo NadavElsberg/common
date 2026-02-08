@@ -13,7 +13,7 @@ __all__ = [
 ]
 
 
-def get_json(path: str, base_dir: str = None):
+def get_json(path: str, base_dir: str = None,fullbackup: bool = False, fallbacktype:type = []) -> Any:
     """Load JSON from a path."""
     if os.path.isabs(path):
         json_path = path
@@ -26,19 +26,21 @@ def get_json(path: str, base_dir: str = None):
         with open(json_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
-        return []
+        if fullbackup:
+            return fallbacktype  # return empty instance of the specified type (e.g. [] or {})
+        raise RuntimeError(f"JSON file not found: {json_path}")
     except json.JSONDecodeError as e:
         raise RuntimeError(f"Failed to parse {json_path}: {e}")
 
 
-def save_json(path: str, data, base_dir: str = None, writepath: bool = True):
+def save_json(file_name: str, data, base_dir: str = None, writepath: bool = True):
     """Save JSON to a path."""
-    if os.path.isabs(path):
-        json_path = path
+    if os.path.isabs(file_name):
+        json_path = file_name
     else:
         if base_dir is None:
             base_dir = os.getcwd()
-        json_path = os.path.join(base_dir, path)
+        json_path = os.path.join(base_dir, file_name)
 
     try:
         os.makedirs(os.path.dirname(json_path), exist_ok=True)
