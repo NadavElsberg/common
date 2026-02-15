@@ -16,3 +16,8 @@ def countTime(func):
         print(f"Function '{func.__name__}' executed in {end_time - start_time:.6f} seconds.")
         return result
     return wrapper
+
+
+def printNoNewLine(*args, **kwargs):
+    """Prints the given arguments without adding a newline at the end."""
+    print(*args, end='', **kwargs)
