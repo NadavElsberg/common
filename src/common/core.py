@@ -1,4 +1,6 @@
+import re
 import time
+
 
 __all__ = [
     name for name in globals()
@@ -11,8 +13,8 @@ def countTime(func):
     """Decorator to measure the execution time of a function."""
     def wrapper(*args, **kwargs):
         start_time = time.time()
-        result = func(*args, **kwargs)
         end_time = time.time()
+        result = func(*args, **kwargs)
         print(f"Function '{func.__name__}' executed in {end_time - start_time:.6f} seconds.")
         return result
     return wrapper
@@ -21,3 +23,9 @@ def countTime(func):
 def printNoNewLine(*args, **kwargs):
     """Prints the given arguments without adding a newline at the end."""
     print(*args, end='', **kwargs)
+
+    
+
+def is_valid_email(email):
+    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(pattern, email) is not None
