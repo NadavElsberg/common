@@ -121,3 +121,8 @@ def duration_format_tuple(length: int, input_unit: str, output_unit: str, show_c
         print(f"{length} {input_unit} = {converted_length:.2f} {output_unit}")
     return (converted_length, output_unit)
 
+
+
+def printNoNewLine(*args, **kwargs):
+    """Prints the given arguments without adding a newline at the end."""
+    print(*args, end='', **kwargs)
