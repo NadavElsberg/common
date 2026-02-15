@@ -29,3 +29,9 @@ def printNoNewLine(*args, **kwargs):
 def is_valid_email(email):
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     return re.match(pattern, email) is not None
+
+def test(mail):
+    if is_valid_email(mail):
+        print("Valid email address.")
+    else:
+        print("Invalid email address.")
