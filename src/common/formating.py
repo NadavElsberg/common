@@ -55,22 +55,14 @@ def bytes_format_string(num_bytes: int, inputsuffix: str = 'B', outputsuffix: st
     suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
     if inputsuffix not in suffixes or outputsuffix not in suffixes:
         raise ValueError("Invalid suffix provided.")
-    index = suffixes.index(inputsuffix)
-    num_bytes_converted = num_bytes / (1024 ** index)
+    input_index = suffixes.index(inputsuffix)
+    output_index = suffixes.index(outputsuffix)
+    num_bytes_converted = num_bytes / (1024 ** (output_index - input_index))
 
-    for suffix in suffixes[index:]:
-        if num_bytes_converted < 1024:
-            break
-        num_bytes_converted /= 1024
-
-    if outputsuffix in suffixes:
-        while suffix != outputsuffix and suffix in suffixes:
-            num_bytes_converted *= 1024
-            suffix = suffixes[suffixes.index(suffix) - 1]
 
     if show_conversion:
-        print(f"{num_bytes} {inputsuffix} = {num_bytes_converted:.2f} {suffix}")
-    return f"{num_bytes_converted:.2f} {suffix}"
+        print(f"{num_bytes} {inputsuffix} = {num_bytes_converted:.2f} {outputsuffix}")
+    return f"{num_bytes_converted:.2f} {outputsuffix}"
 
 
 def bytes_format_tuple(num_bytes: int, inputsuffix: str = 'B', outputsuffix: str = 'B', show_conversion: bool = False):
@@ -79,22 +71,13 @@ def bytes_format_tuple(num_bytes: int, inputsuffix: str = 'B', outputsuffix: str
     suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
     if inputsuffix not in suffixes or outputsuffix not in suffixes:
         raise ValueError("Invalid suffix provided.")
-    index = suffixes.index(inputsuffix)
-    num_bytes_converted = num_bytes / (1024 ** index)
-
-    for suffix in suffixes[index:]:
-        if num_bytes_converted < 1024:
-            break
-        num_bytes_converted /= 1024
-
-    if outputsuffix in suffixes:
-        while suffix != outputsuffix and suffix in suffixes:
-            num_bytes_converted *= 1024
-            suffix = suffixes[suffixes.index(suffix) - 1]
+    input_index = suffixes.index(inputsuffix)
+    output_index = suffixes.index(outputsuffix)
+    num_bytes_converted = num_bytes / (1024 ** (output_index - input_index))
 
     if show_conversion:
-        print(f"{num_bytes} {inputsuffix} = {num_bytes_converted:.2f} {suffix}")
-    return (num_bytes_converted, suffix)
+        print(f"{num_bytes} {inputsuffix} = {num_bytes_converted:.2f} {outputsuffix}")
+    return (num_bytes_converted, outputsuffix)
 
 
 def duration_format_string(length: int, input_unit: str, output_unit: str, show_conversion: bool = False) -> str:   
