@@ -21,4 +21,3 @@ def countTime(func):
 def printNoNewLine(*args, **kwargs):
     """Prints the given arguments without adding a newline at the end."""
     print(*args, end='', **kwargs)
-    print("hii!")
