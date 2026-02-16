@@ -37,20 +37,23 @@ def is_allmost_prime(n: int) -> bool:
     return count == 2
 
 
-def print_matrix(M):
+def print_matrix(M) -> None:
+    """get a 2D list and print it in a readable format"""
     print(f"Matrix M: {M}")
     for i in range(len(M)):
         for j in range(len(M[i])):
             print(f"M[{i}][{j}] = {M[i][j]}")
 
 
-def print_tuples(tup):
+def print_tuples(tup) -> None:
+    """Print each item in a tuple on a new line, along with the entire tuple."""    
     for item in tup:
         print(f"item: {item}")
     print(tup)
 
 
-def control_digit(id_num):
+def control_digit(id_num: int) -> str:
+    """input: 8-digit string, output: control digit as string"""
     assert isinstance(id_num, str) and len(id_num) == 8
 
     total = 0
@@ -70,7 +73,7 @@ def control_digit(id_num):
     return str(check_digit)
 
 
-def audit_ID(IDNumber: str):
+def audit_ID(IDNumber: str) -> bool:
     """Check if the ID number is valid."""
     if len(IDNumber) != 9:
         return False

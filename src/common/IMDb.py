@@ -7,7 +7,7 @@ __all__ = [
 ]
 
 
-def get_imdb_title(name, print_error=False):
+def get_first_imdb_title(name, print_error=False):
     """Get the IMDb title for a given production name.
 
     Uses IMDb's suggestion/search API to find a title matching the given name.
@@ -16,8 +16,7 @@ def get_imdb_title(name, print_error=False):
         name (str): The production name to search for (e.g. "Inception", "Breaking Bad").
 
     Returns:
-        dict: A dictionary with title info including 'id', 'title', 'year', 'type', and 'url',
-              or None if no result is found.
+        the title ID (e.g. "tt1375666") if found for the first matching result, or None if not found or on error.
     """
     # Use IMDb's auto-suggest API (public, no API key needed)
     # It returns JSON with title suggestions matching the query
@@ -32,10 +31,9 @@ def get_imdb_title(name, print_error=False):
         if not results:
             return None
 
-        # Filter to only title results (qid starting with 'movie', 'tvSeries', etc.)
+        # Filter to only title results with an id
         for result in results:
-            qid = result.get("qid", "")
-            if qid in ("movie", "tvSeries", "tvMovie", "tvMiniSeries", "short", "videoGame", "video"):
+            if "id" in result:
                 title_id = result.get("id", "")
                 return title_id
 
@@ -47,7 +45,18 @@ def get_imdb_title(name, print_error=False):
     
 
 def get_imdb_title_info(name, print_error=False):
-    #    Use IMDb's auto-suggest API (public, no API key needed)
+    """Get detailed IMDb title information for a given production name.
+
+    Uses IMDb's suggestion/search API to find a title matching the given name.
+
+    Args:
+        name (str): The production name to search for (e.g. "Inception", "Breaking Bad").
+
+    Returns:
+        dict: A dictionary with title info for the first matching result, including 'id', 'title', 'year', 'type', and 'url',
+              or None if no result is found or on error.
+    """
+    # Use IMDb's auto-suggest API (public, no API key needed)
     # It returns JSON with title suggestions matching the query
     search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(name)}.json"
 

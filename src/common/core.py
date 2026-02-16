@@ -1,15 +1,10 @@
 import re
-import time
-import requests
-
 
 __all__ = [
     name for name in globals()
     if not name.startswith("_")
     and callable(globals()[name])
 ]
-
-
 
 
 def is_valid_email(email):

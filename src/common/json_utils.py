@@ -53,6 +53,12 @@ def save_json(file_name: str, data, base_dir: str = None, writepath: bool = True
 
 
 def atomic_save_json(path, obj):
+    """
+    Docstring for atomic_save_json
+    
+    :param path: Description
+    :param obj: Description
+    """
     d = os.path.dirname(path) or "."
     fd, tmp = tempfile.mkstemp(dir=d)
     with os.fdopen(fd, "w", encoding="utf-8") as f:

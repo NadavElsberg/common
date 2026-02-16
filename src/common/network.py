@@ -152,7 +152,10 @@ def get_mac_address() -> str:
 
 
 def _tuple_is_port_open(host: str, port: int, timeout: float = 1.0) -> tuple[bool,str]:
-    
+    """
+    inputs: host (str), port (int), timeout (float)
+    returns if the port spesified on the host is open: tuple (is_open: bool, message: str)
+    """
     if( not is_port_valid(port)):
         return False, "Invalid port number"
     if not is_hostname_valid(host) and not is_ip_valid(host):

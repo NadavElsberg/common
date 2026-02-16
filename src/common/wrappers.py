@@ -6,6 +6,7 @@ __all__ = [
     and callable(globals()[name])
 ]
 
+
 def baseWrapper(func):
     """A base wrapper function that can be used as a template for other wrappers."""
     def wrapper(*args, **kwargs):
