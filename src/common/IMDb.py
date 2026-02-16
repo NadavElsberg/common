@@ -7,6 +7,8 @@ __all__ = [
 ]
 
 
+
+
 def get_first_imdb_title(name, print_error=False):
     """Get the IMDb title for a given production name.
 
@@ -45,6 +47,7 @@ def get_first_imdb_title(name, print_error=False):
     
 
 def get_imdb_title_info(name, print_error=False):
+
     """Get detailed IMDb title information for a given production name.
 
     Uses IMDb's suggestion/search API to find a title matching the given name.
@@ -87,4 +90,64 @@ def get_imdb_title_info(name, print_error=False):
     except requests.RequestException as e:
         if print_error:
             print(f"Error fetching IMDb title: {e}")
+        return None
+
+
+def get_imdb_look_up(name, print_error=False):
+    """Get IMDb title information for a given production name.
+
+    Uses IMDb's auto-suggest API to find a title matching the given name.
+
+    Args:
+        name (str): The production name to search for (e.g. "Inception", "Breaking Bad").
+
+    Returns:
+        dict: A dictionary with title info for the first matching result, including 'id', 'title', 'year', 'type', and 'url',
+              or None if no result is found or on error.
+    """
+    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(name)}.json"
+
+    try:
+        response = requests.get(search_url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        results = data.get("d", [])
+        if not results:
+            return None
+
+        # Filter to only title results with an id
+        resultsTitle = [result.get("id","") for result in results if "id" in result]
+        if resultsTitle:
+            return resultsTitle
+        return None
+    
+    except requests.RequestException as e:
+        if print_error:
+            print(f"Error fetching IMDb title: {e}")
+        return None
+
+
+def get_title_image(title_id, print_error=False):
+    """Get the image URL for a given IMDb title ID.
+
+    Args:
+        title_id (str): The IMDb title ID (e.g. "tt1375666").
+
+    Returns:
+        str: The URL of the title's image, or None if not found or on error.
+    """
+    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(title_id)}.json"
+
+    try:
+        response = requests.get(search_url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        results = data.get("d", [])
+        return results[0]["i"]["imageUrl"] if "i" in results[0] and "imageUrl" in results[0]["i"] else None  # Return the first image URL if available
+
+    except requests.RequestException as e:
+        if print_error:
+            print(f"Error fetching IMDb title image: {e}")
         return None
