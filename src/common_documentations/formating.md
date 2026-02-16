@@ -85,6 +85,15 @@
 
 ---
 
+### printNoNewLine(*args, **kwargs)
+
+- **Description:** Print the given arguments without appending a newline at the end. A thin wrapper around `print()` with `end=''`.
+- **Parameters:** Same as the built-in `print()` — any positional and keyword arguments are forwarded.
+- **Returns:** None (prints to stdout).
+- **Example:** `printNoNewLine('loading', '...')` prints `loading...` without a trailing newline.
+
+---
+
 ## Notes & best practices
 
 - These helpers are intentionally small and designed for scripting and quick CLI usage. For production code consider:

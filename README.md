@@ -4,11 +4,13 @@ A collection of small, reusable Python utilities intended for use across project
 ## Documentation
 The `src/common_documentations` directory contains detailed documentation for each module:
 
-- [core](src/common_documentations/core.md) — basic utilities and decorators (e.g., `countTime`).
+- [core](src/common_documentations/core.md) — basic utilities (e.g., email validation).
 - [formating](src/common_documentations/formating.md) — helpers to format numbers, bytes, and durations.
+- [IMDb](src/common_documentations/IMDb.md) — IMDb title lookup helpers using the public auto-suggest API.
 - [json_utils](src/common_documentations/json_utils.md) — safe and simple JSON file load/save helpers.
 - [math](src/common_documentations/math.md) — primality and numeric utilities, ID checksum functions.
 - [network](src/common_documentations/network.md) — network utilities: ping, IP discovery, port checks.
+- [wrappers](src/common_documentations/wrappers.md) — reusable decorators for logging and timing.
 
 ## Quick start
 2 ways to get started with the package:

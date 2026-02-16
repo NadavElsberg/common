@@ -2,41 +2,34 @@
 
 ## Overview
 
-`core.py` contains lightweight utility helpers used across the `common` package. At present the module provides a single decorator to measure and report the execution time of a call and defines `__all__` to export public, callable symbols.
+`core.py` contains lightweight utility helpers used across the `common` package. At present the module provides an email validation function and defines `__all__` to export public, callable symbols.
 
 ---
 
 ## Public API
 
-### countTime(func)
+### is_valid_email(email) -> bool
 
-- **Type:** decorator
-- **Description:** A simple timing decorator that measures how long a function takes to execute and prints the elapsed time to stdout. The decorator returns the function's original return value unchanged.
+- **Description:** Validate whether a given string is a well-formed email address using a regular expression check.
 
 - **Parameters:**
-  - `func` (callable): The function to be wrapped.
+  - `email` (str): The email address string to validate.
 
 - **Returns:**
-  - `wrapper` (callable): The wrapped function which prints execution time when invoked.
+  - `bool`: `True` if `email` matches the pattern `^[\w\.-]+@[\w\.-]+\.\w+$`, otherwise `False`.
 
 - **Notes:**
-  - The decorator prints a message of the form: `Function '<name>' executed in <seconds> seconds.` using `time.time()` to measure elapsed wall-clock time.
-  - The decorator makes no attempt to preserve the wrapped function's metadata (such as `__name__`, `__doc__`) — consider using `functools.wraps` if that is important.
-  - Exceptions raised by the wrapped function propagate through unchanged.
+  - The regex covers common email formats but is not fully RFC 5322 compliant. For strict validation consider a dedicated library such as `email-validator`.
+  - The function uses `re.match`, so it anchors the check to the start of the string.
 
 **Example**
 
 ```python
-from common.core import countTime
+from common.core import is_valid_email
 
-@countTime
-def work(n):
-    import time
-    time.sleep(n)
-    return n * 2
-
-# When you call work(0.5), you will see a printed timing line and get 1.0 as return
-result = work(0.5)  # prints: Function 'work' executed in 0.500123 seconds.
+print(is_valid_email("user@example.com"))          # True
+print(is_valid_email("not-an-email"))               # False
+print(is_valid_email("name.last@sub.domain.org"))   # True
 ```
 
 ---
@@ -49,5 +42,5 @@ result = work(0.5)  # prints: Function 'work' executed in 0.500123 seconds.
 
 ## Contributing / Improvements
 
-- If you need to preserve function metadata for decorated functions, wrap the `wrapper` with `functools.wraps(func)`.
-- You could extend this module with additional commonly used decorators (e.g., `retry`, `memoize`) or timing utilities that optionally log to a logger instead of printing.
+- For stricter email validation, consider integrating with the `email-validator` package or extending the regex to handle edge cases (quoted local parts, international domains, etc.).
+- This module can be extended with additional commonly used validation or utility helpers.
