@@ -33,9 +33,10 @@ def get_first_imdb_title(name, print_error=False):
         if not results:
             return None
 
+       
         # Filter to only title results with an id
         for result in results:
-            if "id" in result:
+            if "id" in result and result["id"].startswith("tt"):
                 title_id = result.get("id", "")
                 return title_id
 
@@ -77,12 +78,14 @@ def get_imdb_title_info(name, print_error=False):
             qid = result.get("qid", "")
             if qid in ("movie", "tvSeries", "tvMovie", "tvMiniSeries", "short", "videoGame", "video"):
                 title_id = result.get("id", "")
-                return {
-                    "id": title_id,
-                    "title": result.get("l", ""),
-                    "year": result.get("y", None),
-                    "type": qid,
-                    "url": f"https://www.imdb.com/title/{title_id}/" if title_id else None,
+                if title_id.startswith("tt"):
+                    return {
+                        "id": title_id,
+                        "title": result.get("l", ""),
+                        "year": result.get("y", None),
+                        "type": qid,
+                        "url": f"https://www.imdb.com/title/{title_id}/" if title_id else None,
+                        "imageUrl": result.get("i", {}).get("imageUrl", None) if "i" in result else None
                 }
 
         return None
@@ -117,7 +120,7 @@ def get_imdb_look_up(name, print_error=False):
             return None
 
         # Filter to only title results with an id
-        resultsTitle = [result.get("id","") for result in results if "id" in result]
+        resultsTitle = [result.get("id","") for result in results if "id" in result and result["id"].startswith("tt")]
         if resultsTitle:
             return resultsTitle
         return None
