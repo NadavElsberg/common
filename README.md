@@ -7,6 +7,7 @@ The `src/common_documentations` directory contains detailed documentation for ea
 - [core](src/common_documentations/core.md) — basic utilities (e.g., email validation).
 - [formating](src/common_documentations/formating.md) — helpers to format numbers, bytes, and durations.
 - [IMDb](src/common_documentations/IMDb.md) — IMDb title lookup helpers using the public auto-suggest API.
+- [TMDB](src/common_documentations/TMDB.md) — movie and TV title lookup helpers using the TMDB API (requires an API key).
 - [json_utils](src/common_documentations/json_utils.md) — safe and simple JSON file load/save helpers.
 - [math](src/common_documentations/math.md) — primality and numeric utilities, ID checksum functions.
 - [network](src/common_documentations/network.md) — network utilities: ping, IP discovery, port checks.

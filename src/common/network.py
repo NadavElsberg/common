@@ -375,7 +375,7 @@ def get_host_name(ip: str) -> str:
         return ip
 
 
-def ntfy(server: str = "ntfy.sh", topic: str = "Mistake", data="Someone did not call this function currectly", user: str = None, password: str = None, title: str = None, tags: list[str] = None, priority: int = 3, timeout: int = 5) -> bool:  # pyright: ignore[reportArgumentType]
+def ntfy(server: str = "ntfy.sh", topic: str = "Mistake", data="Someone did not call this function currectly", user: str = None, password: str = None, title: str = None, tags: list[str] = None, priority: int = 3, timeout: int = 5, icon: str = None) -> bool | Exception:  # pyright: ignore[reportArgumentType]
     """
     Send a notification using the ntfy service.
 
@@ -389,7 +389,7 @@ def ntfy(server: str = "ntfy.sh", topic: str = "Mistake", data="Someone did not 
     priority: notification priority (1-5, default 3)
     timeout: request timeout in seconds (default 5)
 
-    returns: True if the notification was sent successfully, otherwise False
+    returns: True if the notification was sent successfully, otherwise the exception that occurred
     """
     try:
         import requests
@@ -400,12 +400,16 @@ def ntfy(server: str = "ntfy.sh", topic: str = "Mistake", data="Someone did not 
             headers["Title"] = title
         if tags:
             headers["Tags"] = ",".join(tags)
+        if icon:
+            headers["Icon"] = icon
         headers["Priority"] = str(priority)
 
         auth = (user, password) if user and password else None
 
         response = requests.post(url, data=data.encode("utf-8"), headers=headers, auth=auth, timeout=timeout)
-        return response.status_code == 200
-    except Exception:
-        return False
+        if response.status_code == 200:
+            return True
+        return ValueError(f"Failed to send ntfy notification: HTTP {response.status_code} - {response.text}")
+    except Exception as exc:
+        return exc
 

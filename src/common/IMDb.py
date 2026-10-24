@@ -1,4 +1,5 @@
 import requests
+from urllib.parse import quote
 
 __all__ = [
     name for name in globals()
@@ -22,7 +23,7 @@ def get_first_imdb_title(name, print_error=False):
     """
     # Use IMDb's auto-suggest API (public, no API key needed)
     # It returns JSON with title suggestions matching the query
-    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(name)}.json"
+    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{quote(name)}.json"
 
     try:
         response = requests.get(search_url, timeout=10)
@@ -62,7 +63,7 @@ def get_imdb_title_info(name, print_error=False):
     """
     # Use IMDb's auto-suggest API (public, no API key needed)
     # It returns JSON with title suggestions matching the query
-    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(name)}.json"
+    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{quote(name)}.json"
 
     try:
         response = requests.get(search_url, timeout=10)
@@ -108,7 +109,7 @@ def get_imdb_look_up(name, print_error=False):
         dict: A dictionary with title info for the first matching result, including 'id', 'title', 'year', 'type', and 'url',
               or None if no result is found or on error.
     """
-    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(name)}.json"
+    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{quote(name)}.json"
 
     try:
         response = requests.get(search_url, timeout=10)
@@ -140,7 +141,7 @@ def get_title_image(title_id, print_error=False):
     Returns:
         str: The URL of the title's image, or None if not found or on error.
     """
-    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{requests.utils.quote(title_id)}.json"
+    search_url = f"https://v3.sg.media-imdb.com/suggestion/x/{quote(title_id)}.json"
 
     try:
         response = requests.get(search_url, timeout=10)
